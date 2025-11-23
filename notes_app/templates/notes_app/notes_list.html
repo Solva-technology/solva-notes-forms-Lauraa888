@@ -1,0 +1,57 @@
+{% extends "notes_app/base.html" %}
+
+{% block title %}Все заметки{% endblock %}
+
+{% block content %}
+<h1>Список заметок</h1>
+
+<form method="get">
+    <label>Статус:</label>
+    <select name="status">
+        <option value="">Все</option>
+        {% for s in statuses %}
+            <option value="{{ s.id }}"
+                {% if selected_status == s.id|stringformat:"s" %}selected{% endif %}>
+                {{ s.name }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <label>Категория:</label>
+    <select name="category">
+        <option value="">Все</option>
+        {% for c in categories %}
+            <option value="{{ c.id }}"
+                {% if selected_category == c.id|stringformat:"s" %}selected{% endif %}>
+                {{ c.name }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <button type="submit">Фильтровать</button>
+</form>
+
+<hr>
+
+{% for note in notes %}
+    <div>
+        <h3>{{ note.content|slice:":100" }}...</h3>
+
+        <p>Автор: {{ note.author.name }}</p>
+        <p>Статус: {{ note.status.name }}</p>
+        <p>Дата: {{ note.created_at }}</p>
+
+        <p>Категория:
+            {% if note.category %}
+                {{ note.category.name }}
+            {% else %}
+                —
+            {% endif %}
+        </p>
+
+        <a href="{% url 'note_detail' note.id %}">Подробнее</a>
+        <hr>
+    </div>
+{% endfor %}
+
+{% endblock %}
