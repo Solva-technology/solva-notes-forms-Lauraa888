@@ -1,73 +1,73 @@
-Django Notes ORM
+[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-2e0aaae1b6195c2367325f4f02e2d04e9abb55f0b24a779b69b11b9e10269abc.svg)](https://classroom.github.com/online_ide?assignment_repo_id=21795378&assignment_repo_type=AssignmentRepo)
+# Note App — Часть #3: Формы (CRUD)
 
-Простое приложение заметок на Django с PostgreSQL и Docker.
+Текущая цель — добавить возможность **создания, изменения и удаления заметок** с помощью Django Forms.  
 
-Возможности
+---
 
-Список пользователей
+## Описание проекта
 
-Детальная страница пользователя
+**Note App** — учебное Django-приложение для работы с заметками.  
 
-Список заметок
+Проект уже включает:  
+- админку и локализацию;  
+- список заметок (главная), страницу отдельной заметки;  
+- базовый шаблон `base.html`;  
+- запуск в Docker + PostgreSQL.  
 
-Детальная страница заметки
+На этом этапе вы реализуете **CRUD для модели `Note`** через формы и шаблоны.  
 
-Создание заметки
+---
 
-Админ-панель Django
+## Новые страницы (CRUD)
 
-Технологии
+### 1. Создание заметки
+- **URL:** `/notes/create/`  
+- Форма для добавления заметки.  
+- Поля: `text`, `status`, `categories`, `author`.  
+- После успешного создания → редирект на главную.  
 
-Python / Django
+### 2. Редактирование заметки
+- **URL:** `/notes/<int:note_id>/edit/`  
+- Форма с предзаполненными данными.  
+- После сохранения → редирект на страницу заметки.  
 
-PostgreSQL
+### 3. Удаление заметки
+- **URL:** `/notes/<int:note_id>/delete/`  
+- Страница подтверждения удаления.  
+- После удаления → редирект на главную.  
 
-Docker / Docker Compose
+---
 
-Как запустить
+## Требования
 
-Создайте файл .env:
+- Использовать Django **ModelForm**.  
+- Все страницы форм наследуются от `base.html`.  
+- Ошибки валидации отображаются в шаблоне.  
+- Авторизация пока не требуется.  
+- Ранее сделанные страницы (список заметок, страница пользователя и т.д.) должны остаться рабочими.
+- Весь функцилнал визуально отображается на сайте в виде ссылок в шапе или у объекта.
 
-POSTGRES_DB=notes_db
-POSTGRES_USER=notes_user
-POSTGRES_PASSWORD=notes_password
-DB_HOST=db
-DB_PORT=5432
+---
 
+## Структура проекта (пример)
 
-Запустите проект:
+```
+note_app/
+├── notes/
+│   ├── templates/notes/
+│   │   ├── note_form.html
+│   │   ├── note_confirm_delete.html
+│   │   ├── note_detail.html
+│   │   └── note_list.html
+│   ├── forms.py
+│   ├── views.py
+│   └── urls.py
+├── templates/base.html
+├── docker-compose.yml
+├── Dockerfile
+└── .env.example
+```
 
-docker-compose up --build
-
-
-Примените миграции:
-
-docker-compose exec web python manage.py migrate
-
-
-Создайте суперпользователя:
-
-docker-compose exec web python manage.py createsuperuser
-
-Доступные страницы
-
-Главная (список заметок):
-http://localhost:8000/
-
-Список пользователей:
-http://localhost:8000/users/
-
-Детальная страница пользователя:
-http://localhost:8000/users/
-<id>/
-
-Детальная заметка:
-http://localhost:8000/notes/
-<id>/
-
-Создание новой заметки:
-http://localhost:8000/add_note/
- (если у тебя такая страница)
-
-Админ-панель:
-http://localhost:8000/admin
+---
+>>>>>>> d2a51fa19cb9d61c2d7361cf336f4ed2d9caa241
