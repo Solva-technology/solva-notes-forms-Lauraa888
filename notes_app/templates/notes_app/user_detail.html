@@ -1,0 +1,23 @@
+{% extends "notes_app/base.html" %}
+
+{% block title %}Пользователь {{ user_obj.name }}{% endblock %}
+
+{% block content %}
+<h1>Пользователь: {{ user_obj.name }}</h1>
+
+<p>Email: {{ user_obj.email }}</p>
+<p>Биография: {{ user_obj.bio }}</p>
+<p>Дата рождения: {{ user_obj.birth_date }}</p>
+
+<h2>Заметки пользователя</h2>
+
+{% for note in notes %}
+    <div>
+        <p><b>Текст:</b> {{ note.text|slice:":100" }}...</p>
+        <p>Статус: {{ note.status.name }}</p>
+        <a href="{% url 'note_detail' note.id %}">Открыть заметку</a>
+    </div>
+    <hr>
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,21 @@
+.
+├── docker-compose.yml
+├── Dockerfile
+├── manage.py
+├── notes/
+│   ├── __init__.py
+│   ├── asgi.py
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+├── notes_app/
+│   ├── admin.py
+│   ├── apps.py
+│   ├── migrations/
+│   ├── models.py
+│   ├── templates/
+│   ├── urls.py
+│   └── views.py
+├── README.md
+├── requirements.txt
+└── structure.txt 

@@ -1,0 +1,31 @@
+{% extends "notes_app/base.html" %}
+
+{% block title %}Заметка {{ note.id }}{% endblock %}
+
+{% block content %}
+<h1>Заметка №{{ note.id }}</h1>
+
+<p><b>Полный текст:</b> {{ note.text }}</p>
+
+<h3>Автор</h3>
+<p>Имя: {{ note.author.name }}</p>
+<p>Email: {{ note.author.email }}</p>
+<p>Биография: {{ note.author.bio }}</p>
+<p>Дата рождения: {{ note.author.birth_date }}</p>
+
+<h3>Статус</h3>
+<p>{{ note.status.name }}</p>
+<p>Финальный: {{ note.status.is_final }}</p>
+
+<h3>Категория</h3>
+<p>{{ note.category.name }}</p>
+
+<hr>
+
+<a href="{% url 'note_edit' note.id %}">✏️ Редактировать</a>
+|
+<a href="{% url 'note_delete' note.id %}" style="color:red;">
+    🗑 Удалить
+</a>
+
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "notes_app/base.html" %}
+
+{% block title %}Пользователи{% endblock %}
+
+{% block content %}
+<h1>Список пользователей</h1>
+
+<ul class="list-group">
+    {% for u in users %}
+    <li class="list-group-item">
+        <strong>{{ u.name }}</strong> — {{ u.email }}
+    </li>
+    {% empty %}
+        <p>Пользователей нет.</p>
+    {% endfor %}
+</ul>
+{% endblock %}
