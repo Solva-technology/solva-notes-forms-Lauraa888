@@ -5,6 +5,10 @@
 {% block content %}
 <h1>Список заметок</h1>
 
+<!-- Кнопка создания новой заметки -->
+<a href="{% url 'note_create' %}">➕ Создать заметку</a>
+<br><br>
+
 <form method="get">
     <label>Статус:</label>
     <select name="status">
@@ -50,6 +54,8 @@
         </p>
 
         <a href="{% url 'note_detail' note.id %}">Подробнее</a>
+        <!-- Кнопка редактирования заметки -->
+        <a href="{% url 'note_edit' note.id %}">✏️ Редактировать</a>
         <hr>
     </div>
 {% endfor %}

@@ -1,73 +1,88 @@
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-2e0aaae1b6195c2367325f4f02e2d04e9abb55f0b24a779b69b11b9e10269abc.svg)](https://classroom.github.com/online_ide?assignment_repo_id=21795378&assignment_repo_type=AssignmentRepo)
-# Note App — Часть #3: Формы (CRUD)
+# Notes App (Django + Docker)
 
-Текущая цель — добавить возможность **создания, изменения и удаления заметок** с помощью Django Forms.  
+Простое приложение для заметок, созданное на Django.
+Поддерживает категории, авторов, статусы и CRUD‑операции (создание, просмотр, редактирование, удаление заметок).
+Проект полностью работает в Docker.
 
----
+## Технологии проекта
 
-## Описание проекта
-
-**Note App** — учебное Django-приложение для работы с заметками.  
-
-Проект уже включает:  
-- админку и локализацию;  
-- список заметок (главная), страницу отдельной заметки;  
-- базовый шаблон `base.html`;  
-- запуск в Docker + PostgreSQL.  
-
-На этом этапе вы реализуете **CRUD для модели `Note`** через формы и шаблоны.  
+* **Python 3.10**
+* **Django 5**
+* **PostgreSQL 15**
+* **Docker & Docker Compose**
+* **HTML / Django Templates**
+* **Bootstrap (если используется)**
+* **Git / GitHub**
 
 ---
 
-## Новые страницы (CRUD)
+## Запуск проекта
 
-### 1. Создание заметки
-- **URL:** `/notes/create/`  
-- Форма для добавления заметки.  
-- Поля: `text`, `status`, `categories`, `author`.  
-- После успешного создания → редирект на главную.  
+### 1. Установите Docker и Docker Compose
 
-### 2. Редактирование заметки
-- **URL:** `/notes/<int:note_id>/edit/`  
-- Форма с предзаполненными данными.  
-- После сохранения → редирект на страницу заметки.  
+Если они не установлены, скачайте их с официального сайта Docker.
 
-### 3. Удаление заметки
-- **URL:** `/notes/<int:note_id>/delete/`  
-- Страница подтверждения удаления.  
-- После удаления → редирект на главную.  
+### 2. Клонируйте репозиторий
 
----
+```bash
+git clone https://github.com/<your-username>/<your-repo>.git
+cd <project-folder>
+```
 
-## Требования
+### 3. Запустите проект
 
-- Использовать Django **ModelForm**.  
-- Все страницы форм наследуются от `base.html`.  
-- Ошибки валидации отображаются в шаблоне.  
-- Авторизация пока не требуется.  
-- Ранее сделанные страницы (список заметок, страница пользователя и т.д.) должны остаться рабочими.
-- Весь функцилнал визуально отображается на сайте в виде ссылок в шапе или у объекта.
+```bash
+docker compose up --build
+```
 
----
-
-## Структура проекта (пример)
+После сборки приложение будет доступно по адресу:
 
 ```
-note_app/
-├── notes/
-│   ├── templates/notes/
-│   │   ├── note_form.html
-│   │   ├── note_confirm_delete.html
-│   │   ├── note_detail.html
-│   │   └── note_list.html
-│   ├── forms.py
-│   ├── views.py
-│   └── urls.py
-├── templates/base.html
+http://localhost:8000/
+```
+
+---
+
+## Миграции
+
+Если нужно вручную создать или применить миграции:
+
+```bash
+docker compose exec web python manage.py makemigrations
+docker compose exec web python manage.py migrate
+```
+
+---
+
+## Основной функционал
+
+* Создание заметки
+* Просмотр списка заметок
+* Детальная страница
+* Удаление заметки
+* Категории заметок
+* Авторы заметок
+* Статусы заметок
+
+---
+
+## Структура проекта
+
+```
+project/
+│
 ├── docker-compose.yml
 ├── Dockerfile
-└── .env.example
+├── requirements.txt
+│
+├── notes/               # Django‑проект
+├── notes_app/           # Основное приложение
+│   ├── models.py
+│   ├── views.py
+│   ├── urls.py
+│   ├── forms.py
+│   └── templates/
+│
+└── README.md
 ```
 
----
->>>>>>> d2a51fa19cb9d61c2d7361cf336f4ed2d9caa241

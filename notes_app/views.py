@@ -1,11 +1,12 @@
 from django.shortcuts import render
+from .forms import NoteForm
 from .models import Note, Status, Category
 
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Note, User, Status, Category
 
 
-# 1. Список заметок + фильтры
+
 def notes_list(request):
     status_id = request.GET.get("status")
     category_id = request.GET.get("category")
@@ -16,11 +17,11 @@ def notes_list(request):
         .all()
     )
 
-    # Фильтр по статусу
+    
     if status_id:
         notes = notes.filter(status_id=status_id)
 
-    # Фильтр по категории
+    
     if category_id:
         notes = notes.filter(category_id=category_id)
 
@@ -38,14 +39,14 @@ def notes_list(request):
     return render(request, "notes_app/notes_list.html", context)
 
 
-# 2. Детальная страница заметки
+
 def note_detail(request, note_id):
     note = get_object_or_404(Note, id=note_id)
 
     return render(request, "notes_app/note_detail.html", {"note": note})
 
 
-# 3. Страница пользователя
+
 def user_detail(request, user_id):
     user_obj = get_object_or_404(User, id=user_id)
 
@@ -58,6 +59,46 @@ def user_detail(request, user_id):
     )
 
 
+
 def users_list(request):
     users = User.objects.all()
     return render(request, "notes_app/users_list.html", {"users": users})
+
+
+
+def note_create(request):
+    if request.method == "POST":
+        form = NoteForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("notes_list")  # имя твоего списка заметок
+    else:
+        form = NoteForm()
+
+    return render(request, "notes_app/note_form.html", {"form": form})
+
+
+
+def note_edit(request, note_id):
+    note = get_object_or_404(Note, id=note_id)
+
+    if request.method == "POST":
+        form = NoteForm(request.POST, instance=note)
+        if form.is_valid():
+            form.save()
+            return redirect("note_detail", note_id=note.id)
+    else:
+        form = NoteForm(instance=note)
+
+    return render(request, "notes_app/note_form.html", {"form": form})
+
+
+
+def note_delete(request, note_id):
+    note = get_object_or_404(Note, id=note_id)
+
+    if request.method == "POST":
+        note.delete()
+        return redirect("notes_list")
+
+    return render(request, "notes_app/note_confirm_delete.html", {"note": note})

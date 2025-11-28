@@ -17,11 +17,15 @@
 <p>{{ note.status.name }}</p>
 <p>Финальный: {{ note.status.is_final }}</p>
 
-<h3>Категории</h3>
-<ul>
-    {% for c in note.categories.all %}
-        <li>{{ c.name }}</li>
-    {% endfor %}
-</ul>
+<h3>Категория</h3>
+<p>{{ note.category.name }}</p>
+
+<hr>
+
+<a href="{% url 'note_edit' note.id %}">✏️ Редактировать</a>
+|
+<a href="{% url 'note_delete' note.id %}" style="color:red;">
+    🗑 Удалить
+</a>
 
 {% endblock %}

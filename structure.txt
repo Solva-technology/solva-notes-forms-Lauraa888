@@ -1,59 +1,21 @@
-.:
-docker-compose.yml
-Dockerfile
-manage.py*
-notes/
-notes_app/
-README.md
-requirements.txt
-structure.txt
-
-./notes:
-__init__.py
-__pycache__/
-asgi.py
-settings.py
-urls.py
-wsgi.py
-
-./notes/__pycache__:
-__init__.cpython-310.pyc
-settings.cpython-310.pyc
-urls.cpython-310.pyc
-wsgi.cpython-310.pyc
-
-./notes_app:
-__init__.py
-__pycache__/
-admin.py
-apps.py
-migrations/
-models.py
-templates/
-urls.py
-views.py
-
-./notes_app/__pycache__:
-__init__.cpython-310.pyc
-admin.cpython-310.pyc
-apps.cpython-310.pyc
-models.cpython-310.pyc
-urls.cpython-310.pyc
-views.cpython-310.pyc
-
-./notes_app/migrations:
-__init__.py
-__pycache__/
-0001_initial.py
-0002_alter_category_options_alter_note_options_and_more.py
-
-./notes_app/migrations/__pycache__:
-__init__.cpython-310.pyc
-0001_initial.cpython-310.pyc
-0002_alter_category_options_alter_note_options_and_more.cpython-310.pyc
-
-./notes_app/templates:
-notes_app/
-
-./notes_app/templates/notes_app:
-add_note.html
+.
+├── docker-compose.yml
+├── Dockerfile
+├── manage.py
+├── notes/
+│   ├── __init__.py
+│   ├── asgi.py
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+├── notes_app/
+│   ├── admin.py
+│   ├── apps.py
+│   ├── migrations/
+│   ├── models.py
+│   ├── templates/
+│   ├── urls.py
+│   └── views.py
+├── README.md
+├── requirements.txt
+└── structure.txt 
