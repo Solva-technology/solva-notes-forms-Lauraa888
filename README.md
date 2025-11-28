@@ -11,7 +11,6 @@
 * **PostgreSQL 15**
 * **Docker & Docker Compose**
 * **HTML / Django Templates**
-* **Bootstrap (если используется)**
 * **Git / GitHub**
 
 ---
